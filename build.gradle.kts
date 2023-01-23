@@ -77,7 +77,9 @@ application {
 
 // include JS artifacts in any JAR we generate
 tasks.getByName<Jar>("jvmJar") {
-    val taskName = if (project.hasProperty("isProduction")) {
+    val taskName = if (project.hasProperty("isProduction")
+        || project.gradle.startParameter.taskNames.contains("installDist")
+    ) {
         "jsBrowserProductionWebpack"
     } else {
         "jsBrowserDevelopmentWebpack"
