@@ -2,6 +2,7 @@ import react.*
 import kotlinx.coroutines.*
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.li
+import react.dom.html.ReactHTML.p
 import react.dom.html.ReactHTML.ul
 
 private val scope = MainScope()
@@ -16,15 +17,27 @@ val App = FC<Props> {
     }
 
     h1 {
-        +"Full-Stack Shopping List"
+        +"Shopping List"
+    }
+    p {
+        +"Click list item to remove it"
     }
     ul {
         shoppingList.sortedByDescending(ShoppingListItem::priority).forEach { item ->
             li {
                 key = item.toString()
+                onClick = {
+                    scope.launch {
+                        deleteShoppingListItem(item)
+                        shoppingList = getShoppingList()
+                    }
+                }
                 +"[${item.priority}] ${item.desc} "
             }
         }
+    }
+    p {
+        +"Add items to list, appending exclamation points to prioritize"
     }
     inputComponent {
         onSubmit = { input ->
