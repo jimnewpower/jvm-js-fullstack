@@ -3,9 +3,11 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 val kotlinVersion = "1.7.20"
 val serializationVersion = "1.2.1"
 val ktor_version = "2.2.2"
+val kotlinWrappersVersion = "1.0.0-pre.354"
 val logbackVersion = "1.2.3"
 val kmongoVersion = "4.2.7"
 val reactWrappersVersion = "17.0.2-pre.214-kotlin-1.5.20"
+val reactVersion = "17.0.2"
 
 plugins {
     kotlin("multiplatform") version "1.7.20"
@@ -51,7 +53,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-compression:$ktor_version")
                 implementation("io.ktor:ktor-serialization:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-                implementation("io.ktor:ktor-server-core:$ktor_version")
+                implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
                 implementation("io.ktor:ktor-server-netty:$ktor_version")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongoVersion")
@@ -60,12 +62,19 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
+                implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
                 implementation("io.ktor:ktor-client-js:$ktor_version")
                 implementation("io.ktor:ktor-client-json:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
-
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactWrappersVersion")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactWrappersVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+                implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
+//                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactWrappersVersion")
+//                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactWrappersVersion")
+//                implementation(npm("react", "$reactVersion"))
+//                implementation(npm("react-dom", "$reactVersion"))
             }
         }
     }
