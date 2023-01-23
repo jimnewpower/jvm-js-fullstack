@@ -71,10 +71,6 @@ kotlin {
                 implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
-//                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactWrappersVersion")
-//                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactWrappersVersion")
-//                implementation(npm("react", "$reactVersion"))
-//                implementation(npm("react-dom", "$reactVersion"))
             }
         }
     }
