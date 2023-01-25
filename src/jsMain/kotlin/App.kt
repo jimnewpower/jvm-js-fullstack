@@ -20,7 +20,7 @@ val App = FC<Props> {
         +"Shopping List"
     }
     p {
-        +"Click list item to remove it"
+        +"Remove list items by clicking on them:"
     }
     ul {
         shoppingList.sortedByDescending(ShoppingListItem::priority).forEach { item ->
@@ -37,7 +37,7 @@ val App = FC<Props> {
         }
     }
     p {
-        +"Add items to list, appending exclamation points to prioritize"
+        +"Add items to list, appending exclamation points to prioritize:"
     }
     inputComponent {
         onSubmit = { input ->
